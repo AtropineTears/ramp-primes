@@ -57,7 +57,7 @@ fn fermat(candidate: &Int) -> bool {
 
 
 fn miller_rabin(candidate: &Int, limit: usize) -> bool {
-    println!("Miller Attempt");
+    //println!("Miller Attempt");
     // One and Two in ramp::Int form
     let one = Int::one();
     let two = &one + &one;
@@ -65,41 +65,48 @@ fn miller_rabin(candidate: &Int, limit: usize) -> bool {
     //let n_minus: Int = candidate - one;
     //let n_minus_2: Int = n_minus - one;
     
-    let (s,d) = rewrite(&candidate);
+    let (d,s) = rewrite(&candidate);
 
     let mut rng = rand::thread_rng();
 
     for i in 0..limit {
-        println!("i: {}",i);
-        let basis = rng.gen_int_range(&two, &(candidate-&two));
+        //println!("i: {}",i);
+        // Exclusive End Range
+        let a = rng.gen_int_range(&two, &(candidate-&one));
+        //println!("a: {}",a);
+        //println!("d: {}",d.clone());
         //let basis = Int::sample_range(&two, &(candidate-&two));
         
-        let mut y = basis.pow_mod(&d,&candidate);
+        let mut x = a.pow_mod(&d, &candidate);
+        //println!("x: {}",x);
         //let mut y = Int::modpow(&basis, &d, candidate);
 
-        if y == one || y == (candidate - &one) {
+        if x == one || x == (candidate - &one) {
+            //println!("Reached Continue Statement");
             continue;
-        } else {
+        }
+        else {
+            //println!("Else Statement");
             for _ in one.clone()..(s - one).clone() {
-                y = y.pow_mod(&two,candidate);
+                x = x.pow_mod(&two,candidate);
                 //y = Int::modpow(&y, &two, candidate);
-                if y == Int::one() {
+                if x == Int::one() {
                     return false
-                } else if y == candidate - Int::one() {
+                } 
+                else if x == (candidate - Int::one()) {
                     break;
                 }
             }
-            println!("Returned False on Miller Test");
+            //println!("Returned False on Miller Test");
             return false;
         }
     }
-    println!("Returned True on Miller Test");
+    //println!("Returned True on Miller Test");
     true
 }
 
 
 fn rewrite(n: &Int) -> (Int,Int) {
-    let zero: Int = Int::zero();
     let one: Int = Int::one();
     let two: Int = Int::one() + Int::one();
     let mut i: Int = Int::zero();
@@ -116,9 +123,9 @@ fn rewrite(n: &Int) -> (Int,Int) {
         i = i + &one;
     }
 
-    println!("Factors:");
-    println!("d: {}",d);
-    println!("2^{}",i);
+    //println!("Factors:");
+    //println!("d: {}",d);
+    //println!("2^{}",i);
     return (d.clone(),i)
 }
 
@@ -135,7 +142,7 @@ fn is_prime(candidate: &Int) -> bool {
     }
 
     // Finally, Miller-Rabin test
-    if !miller_rabin(candidate, 4) {
+    if !miller_rabin(candidate, 16) {
         return false;
     }
     true
@@ -149,10 +156,8 @@ mod tests {
         assert_eq!(2 + 2, 4);
     }
     #[test]
-    fn run(){
-        let x = new_prime(128);
+    fn get_prime(){
+        let x = new_prime(512);
         println!("Prime: {}",x)
-        //let uint = generate_uint(16);
-        //let (d,r) = rewrite(&uint);
     }
 }
