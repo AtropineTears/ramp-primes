@@ -8,20 +8,22 @@ use ramp::int::Int;
 use ramp::traits::Integer;
 use ramp::traits::DivRem;
 
-pub fn generate_uint(n: usize) -> Int{
+pub fn new_uint(n: usize) -> Int{
     let mut rng = rand::thread_rng();
     let mut uint = rng.gen_uint(n);
     uint.set_bit((n-1) as u32, true);
-    println!("{}",uint);
+    //println!("{}",uint);
     return uint;
 }
+/*
 pub fn generate_int(n: usize) -> Int {
     let mut rng = rand::thread_rng();
     let mut int = rng.gen_int(n);
     int.set_bit((n-1) as u32, true);
-    println!("{}",int);
+    //println!("{}",int);
     return int;
 }
+*/
 
 
 pub fn new_prime(n: usize) -> Int {
@@ -30,7 +32,7 @@ pub fn new_prime(n: usize) -> Int {
         let mut candidate: Int = rng.gen_uint(n); 
         candidate.set_bit(0, true);
         candidate.set_bit((n-1) as u32, true);
-        println!("Number: {}",candidate);
+        //println!("Number: {}",candidate);
         if is_prime(&candidate) == true { 
             return candidate;
         }
@@ -69,7 +71,7 @@ fn miller_rabin(candidate: &Int, limit: usize) -> bool {
 
     let mut rng = rand::thread_rng();
 
-    for i in 0..limit {
+    for _i in 0..limit {
         //println!("i: {}",i);
         // Exclusive End Range
         let a = rng.gen_int_range(&two, &(candidate-&one));

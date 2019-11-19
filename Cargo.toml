@@ -1,5 +1,5 @@
 [package]
-name = "Nano_PoW"
+name = "prime-ribs"
 version = "0.1.0"
 authors = ["0xSilene <51803887+0xSilene@users.noreply.github.com>"]
 edition = "2018"
@@ -8,5 +8,4 @@ edition = "2018"
 
 [dependencies]
 rand = "0.5.0"
-num-bigint = { version = "0.2", features = ["rand"] }
 ramp = "0.5.3"
