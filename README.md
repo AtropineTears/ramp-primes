@@ -1,6 +1,7 @@
 # ramp-primes: A Large, Random Composite and Prime Number Generator
 
 [![Build Status](https://travis-ci.org/0xSilene/ramp-primes.svg?branch=master)](https://travis-ci.org/0xSilene/ramp-primes)
+[![Crates.io](https://img.shields.io/crates/v/ramp-primes)](https://crates.io/crates/ramp-primes)
 
 This crate provides a **beautifully simplistic API** for generating large, cryptographically-random, integers in rust, including but not limited to **prime numbers**.
 
