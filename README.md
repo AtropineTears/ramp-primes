@@ -6,17 +6,21 @@ This crate provides a **beautifully simplistic API** for generating large, crypt
 
 It takes full advantage of the [RAMP](https://crates.io/crates/ramp) crate, which provides high-performance large integers through in-line assembly and a high level, simplistic interface for users to use, as well as lower-level components allowing complete control over large integers.
 
-It *may* require the use of the nightly build due to the use of ramp with inline-assembly.
+This crate **requires the use of the nightly toolchain** due to the use of ramp with inline-assembly.
 
 ## Usage
 
 Add the following to your `cargo.toml`:
 
-`ramp-primes = "*"`
+`ramp-primes = "0.1.0"`
 
 `ramp = "0.5"`
 
-If you have not already, install the nightly toolchain as this will only work on the nightly branch.
+If you have not already, install the nightly toolchain as this will only work on the nightly branch and then set as default toolchain.
+
+`rustup toolchain install nightly`
+
+`rustup default nightly`
 
 ### Example of Prime Number Generation
 
