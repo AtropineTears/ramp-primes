@@ -1,8 +1,16 @@
 [package]
-name = "prime-ribs"
+name = "ramp-primes"
 version = "0.1.0"
-authors = ["0xSilene <51803887+0xSilene@users.noreply.github.com>"]
+authors = ["0xSilene <51803887+0xSilene@users.noreply.github.com>","451Labs"]
 edition = "2018"
+description = "A Rust Library For Generating Large Prime and Composite Numbers using ramp with a simplistic interface."
+keywords = ["random","primes","ramp","num","generation"]
+homepage = "https://github.com/0xSilene/ramp-primes"
+repository = "https://github.com/0xSilene/ramp-primes"
+categories = ["cryptography", "science","algorithms"]
+readme = "README.md"
+license = "MIT OR APACHE-2.0"
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
