@@ -1,5 +1,7 @@
 # ramp-primes: A Large, Random Composite and Prime Number Generator
 
+[![Build Status](https://travis-ci.org/0xSilene/ramp-primes.svg?branch=master)](https://travis-ci.org/0xSilene/ramp-primes)
+
 This crate provides a **beautifully simplistic API** for generating large, cryptographically-random, integers in rust, including but not limited to **prime numbers**.
 
 It takes full advantage of the [RAMP](https://crates.io/crates/ramp) crate, which provides high-performance large integers through in-line assembly and a high level, simplistic interface for users to use, as well as lower-level components allowing complete control over large integers.
@@ -14,7 +16,7 @@ Add the following to your `cargo.toml`:
 
 `ramp = "0.5"`
 
-If you have not already, install the nightly toolchain:
+If you have not already, install the nightly toolchain as this will only work on the nightly branch.
 
 ### Example of Prime Number Generation
 
