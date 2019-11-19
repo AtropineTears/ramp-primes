@@ -11,6 +11,8 @@ categories = ["cryptography", "science","algorithms"]
 readme = "README.md"
 license = "MIT OR APACHE-2.0"
 
+[badges]
+travis-ci = { repository = "0xSilene/ramp-primes", branch = "master" }
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
