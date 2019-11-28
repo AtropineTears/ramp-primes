@@ -9,7 +9,7 @@ homepage = "https://github.com/0xSilene/ramp-primes"
 repository = "https://github.com/0xSilene/ramp-primes"
 categories = ["cryptography", "science","algorithms"]
 readme = "README.md"
-license = "MIT OR APACHE-2.0"
+license = "MIT OR Apache-2.0"
 
 [badges]
 travis-ci = { repository = "0xSilene/ramp-primes", branch = "master" }
