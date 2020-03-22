@@ -38,6 +38,17 @@ fn main(){
 }
 ```
 
+### Example of Safe Prime Number Generation
+
+```rust
+use ramp_primes::safe_prime;
+
+fn main(){
+    // Outputs a Large Prime with 64 bits
+    let p = safe_prime(64);
+}
+```
+
 ### Example of Random Number Generation
 
 ```rust
@@ -79,6 +90,10 @@ The numbers go through multiple tests to determine whether they are composite or
 3. **Miller-Rabin Primality Test**, the gold standard recommended by the official RSA documentation and by [NIST](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf) on generating primes, is performed with 16 iterations, the same used by Apple's cryptosystem.
 
 If the number passes these tests, it is considered with high probability to be prime. Feel free to verify them yourselves on [Wolfram Alpha](https://www.wolframalpha.com/) by simply typing in the prime number.
+
+### Safe Primes
+
+Safe Primes are generated simply by checking if 2q + 1 is a prime with the tests listed above.
 
 ## License
 

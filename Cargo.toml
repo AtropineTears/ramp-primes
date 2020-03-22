@@ -1,10 +1,10 @@
 [package]
 name = "ramp-primes"
 version = "0.1.0"
-authors = ["0xSilene <51803887+0xSilene@users.noreply.github.com>","451Labs"]
+authors = ["0xSilene <51803887+0xSilene@users.noreply.github.com>","0xAtropa"]
 edition = "2018"
 description = "A Rust Library For Generating Large Prime and Composite Numbers using ramp with a simplistic interface."
-keywords = ["random","primes","ramp","num","generation"]
+keywords = ["random","primes","ramp","num","math"]
 homepage = "https://github.com/0xSilene/ramp-primes"
 repository = "https://github.com/0xSilene/ramp-primes"
 categories = ["cryptography", "science","algorithms"]
@@ -18,4 +18,4 @@ travis-ci = { repository = "0xSilene/ramp-primes", branch = "master" }
 
 [dependencies]
 rand = "0.5.0"
-ramp = "0.5.3"
+ramp = "0.5.5"
