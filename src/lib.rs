@@ -5,7 +5,7 @@ use ramp::RandomInt;
 use ramp::int::Int;
 
 /// Verifies whether the input is a composite number or not
-pub fn verify_composite(input: Int) {
+pub fn verify_composite(input: Int) -> bool {
     if is_prime(&input) == false {
         return true
     }
@@ -15,7 +15,7 @@ pub fn verify_composite(input: Int) {
 }
 
 /// Verifies whether the input is a prime number or not
-pub fn verify_prime(input: Int) {
+pub fn verify_prime(input: Int) -> bool {
     if is_prime(&input) == true { 
         return true;
     }
@@ -267,7 +267,7 @@ mod tests {
     }
     #[test]
     fn get_safe_prime(){
-        let x = safe_prime(64);
+        let x = safe_prime(256);
         println!("Safe Prime: {}",x);
     }
 }
