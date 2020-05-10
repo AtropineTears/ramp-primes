@@ -4,7 +4,17 @@ extern crate ramp;
 use ramp::RandomInt;
 use ramp::int::Int;
 
+/// Verifies whether the input is a composite number or not
+pub fn verify_composite(input: Int) {
+    if is_prime(&input) == false {
+        return true
+    }
+    else {
+        return false
+    }
+}
 
+/// Verifies whether the input is a prime number or not
 pub fn verify_prime(input: Int) {
     if is_prime(&input) == true { 
         return true;
@@ -93,7 +103,6 @@ pub fn safe_prime(n: usize) -> Int {
         let mut candidate: Int = rng.gen_uint(n); 
         candidate.set_bit(0, true);
         candidate.set_bit((n-1) as u32, true);
-        //println!("Number: {}",candidate);
         if is_prime(&candidate) == true { 
             if is_safe_prime(&candidate) == true {
                 return candidate;
@@ -220,14 +229,14 @@ fn is_prime(candidate: &Int) -> bool {
     }
     true
 }
+// (n-1)/2
 fn is_safe_prime(number: &Int) -> bool {
     let one = Int::one();
     let two = &one + &one;
 
-    let x = number * two;
-    let y = x + one;
+    let result = (number - one) / two;
     
-    if is_prime(&y) {
+    if is_prime(&result) {
         return true;
     }
     else {
