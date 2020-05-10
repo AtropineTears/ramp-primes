@@ -1,7 +1,7 @@
 [package]
 name = "ramp-primes"
 version = "0.2.0"
-authors = ["0xSilene <51803887+0xSilene@users.noreply.github.com>","0xAtropa"]
+authors = ["0xSilene <51803887+0xSilene@users.noreply.github.com>","AtropineTears"]
 edition = "2018"
 description = "A Rust Library For Generating Large Prime and Composite Numbers using ramp with a simplistic interface."
 keywords = ["random","primes","ramp","num","math"]
