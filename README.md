@@ -2,6 +2,9 @@
 
 [![Build Status](https://travis-ci.org/0xSilene/ramp-primes.svg?branch=master)](https://travis-ci.org/0xSilene/ramp-primes)
 [![Crates.io](https://img.shields.io/crates/v/ramp-primes)](https://crates.io/crates/ramp-primes)
+![Crates.io](https://img.shields.io/crates/l/ramp-primes?style=flat-square)
+
+
 
 This crate provides a **beautifully simplistic API** for generating large, cryptographically-random, integers in rust, including but not limited to **prime numbers**.
 
@@ -13,7 +16,7 @@ This crate **requires the use of the nightly toolchain** due to the use of ramp 
 
 Add the following to your `cargo.toml`:
 
-`ramp-primes = "0.1.0"`
+`ramp-primes = "0.3.0"`
 
 `ramp = "0.5"`
 
@@ -44,7 +47,7 @@ fn main(){
 use ramp_primes::safe_prime;
 
 fn main(){
-    // Outputs a Large Prime with 64 bits
+    // Outputs a Large Prime with 64 bits using [(n-1)/2]
     let p = safe_prime(64);
 }
 ```
