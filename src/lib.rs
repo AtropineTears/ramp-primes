@@ -1,123 +1,140 @@
+#![no_std]
+
 extern crate rand;
 extern crate ramp;
 
 use ramp::RandomInt;
 use ramp::int::Int;
 
-/// Verifies whether the input is a composite number or not
-pub fn verify_composite(input: Int) -> bool {
-    if is_prime(&input) == false {
-        return true
-    }
-    else {
-        return false
-    }
-}
-
-/// Verifies whether the input is a prime number or not
-pub fn verify_prime(input: Int) -> bool {
-    if is_prime(&input) == true { 
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-/// # Large Unsigned Integer Generator
-/// 
-/// This function takes as input n, the bit-length specified for the integer.
-/// 
-/// ## Example
-/// ```
-/// use ramp_primes::new_uint;
-/// 
-/// fn main(){
-///     // Outputs a Large Integer with 1024 bits
-///     let large_uint = new_uint(1024);
-/// }
-/// ```
-pub fn new_uint(n: usize) -> Int{
-    let mut rng = rand::thread_rng();
-    let mut uint = rng.gen_uint(n);
-    uint.set_bit((n-1) as u32, true);
-    //println!("{}",uint);
-    return uint;
-}
-/*
-pub fn generate_int(n: usize) -> Int {
-    let mut rng = rand::thread_rng();
-    let mut int = rng.gen_int(n);
-    int.set_bit((n-1) as u32, true);
-    //println!("{}",int);
-    return int;
-}
-*/
+pub struct Generator;
+pub struct Verification;
 
 
-/// # Large Prime Generator
-/// 
-/// This function takes as input n, the bit-length specified for the prime number.
-/// 
-/// ## Example
-/// ```
-/// use ramp_primes::new_prime;
-/// 
-/// fn main(){
-///     // Outputs a Large Prime with 512 bits
-///     let p = new_prime(512);
-///     let q = new_prime(512);
-/// 
-///     // Multiplies p times q and returns the product
-///     let n = p * q;
-/// }
-/// ```
-pub fn new_prime(n: usize) -> Int {
-    let mut rng = rand::thread_rng();
-    loop {
-        let mut candidate: Int = rng.gen_uint(n); 
-        candidate.set_bit(0, true);
-        candidate.set_bit((n-1) as u32, true);
-        //println!("Number: {}",candidate);
-        if is_prime(&candidate) == true { 
-            return candidate;
-        }
+impl Generator {
+    /// # Large Unsigned Integer Generator
+    /// 
+    /// This function takes as input n, the bit-length specified for the integer.
+    /// 
+    /// ## Example
+    /// ```
+    /// use ramp_primes::new_uint;
+    /// 
+    /// fn main(){
+    ///     // Outputs a Large Integer with 1024 bits
+    ///     let large_uint = new_uint(1024);
+    /// }
+    /// ```
+    pub fn new_uint(n: usize) -> Int{
+        let mut rng = rand::thread_rng();
+        let mut uint = rng.gen_uint(n);
+        uint.set_bit((n-1) as u32, true);
+        //println!("{}",uint);
+        return uint;
     }
-}
-/// # Safe Prime Generator
-/// 
-/// This function takes as input n, the bit-length specified for the safe prime number. This function is slower than prime number generation itself.
-/// 
-/// ## Example
-/// ```
-/// use ramp_primes::safe_prime;
-/// 
-/// fn main(){
-///     // Outputs a Large Prime with 64 bits
-///     let p = safe_prime(64);
-/// }
-/// ```
-pub fn safe_prime(n: usize) -> Int {
-    let mut rng = rand::thread_rng();
-    loop {
-        let mut candidate: Int = rng.gen_uint(n); 
-        candidate.set_bit(0, true);
-        candidate.set_bit((n-1) as u32, true);
-        if is_prime(&candidate) == true { 
-            if is_safe_prime(&candidate) == true {
+    /*
+    pub fn generate_int(n: usize) -> Int {
+        let mut rng = rand::thread_rng();
+        let mut int = rng.gen_int(n);
+        int.set_bit((n-1) as u32, true);
+        //println!("{}",int);
+        return int;
+    }
+    */
+    
+    
+    /// # Large Prime Generator
+    /// 
+    /// This function takes as input n, the bit-length specified for the prime number.
+    /// 
+    /// ## Example
+    /// ```
+    /// use ramp_primes::new_prime;
+    /// 
+    /// fn main(){
+    ///     // Outputs a Large Prime with 512 bits
+    ///     let p = new_prime(512);
+    ///     let q = new_prime(512);
+    /// 
+    ///     // Multiplies p times q and returns the product
+    ///     let n = p * q;
+    /// }
+    /// ```
+    pub fn new_prime(n: usize) -> Int {
+        let mut rng = rand::thread_rng();
+        loop {
+            let mut candidate: Int = rng.gen_uint(n); 
+            candidate.set_bit(0, true);
+            candidate.set_bit((n-1) as u32, true);
+            //println!("Number: {}",candidate);
+            if is_prime(&candidate) == true { 
                 return candidate;
             }
         }
     }
-}
-
-// VSN
-fn vsn(m: Int,n: Int, c: Int){
-    // c: fixed-constant
+    /// # Safe Prime Generator
+    /// 
+    /// This function takes as input n, the bit-length specified for the safe prime number. This function is slower than prime  number generation itself.
+    /// 
+    /// ## Example
+    /// ```
+    /// use ramp_primes::safe_prime;
+    /// 
+    /// fn main(){
+    ///     // Outputs a Large Prime with 64 bits
+    ///     let p = safe_prime(64);
+    /// }
+    /// ```
+    pub fn new_safe_prime(n: usize) -> Int {
+        let mut rng = rand::thread_rng();
+        loop {
+            let mut candidate: Int = rng.gen_uint(n); 
+            candidate.set_bit(0, true);
+            candidate.set_bit((n-1) as u32, true);
+            if is_prime(&candidate) == true { 
+                if is_safe_prime(&candidate) == true {
+                    return candidate;
+                }
+            }
+        }
+    }
     
-    // if m's greatest prime factor < log(n)^c
+    pub fn new_safe_prime_experimental(n: usize) -> Int {
+        let mut rng = rand::thread_rng();
+        
+        loop {
+            let mut candidate: Int = rng.gen_uint(n); 
+            candidate.set_bit(0, true);
+            candidate.set_bit((n-1) as u32, true);
+            
+            if is_prime(&candidate) == true { 
+                if let Some(x) = experimental_is_safe_prime(&candidate){
+                    return x
+                }
+            }
+        }
+    }
 }
+impl Verification {
+    /// Verifies whether the input is a composite number or not
+    pub fn verify_composite(input: Int) -> bool {
+        if is_prime(&input) == false {
+            return true
+        }
+        else {
+            return false
+        }
+    }
 
+    /// Verifies whether the input is a prime number or not
+    pub fn verify_prime(input: Int) -> bool {
+        if is_prime(&input) == true { 
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+}
 
 // Primes
 fn div_small_primes(numb: &Int) -> bool { 
@@ -244,6 +261,25 @@ fn is_safe_prime(number: &Int) -> bool {
     }
 }
 
+// Both Searches
+fn experimental_is_safe_prime(n: &Int) -> Option<Int> {
+    let one = Int::one();
+    let two = &one + &one;
+
+    let result = (&two * n) - &one;
+    let result_two = (n - &one) / &two;
+
+    if is_prime(&result){
+        return Some(result)
+    }
+    else if is_prime(&result_two) {
+        return Some(result_two)
+    }
+    else {
+        return None
+    }
+}
+
 
 #[cfg(test)]
 mod tests {
@@ -255,19 +291,21 @@ mod tests {
         const BIT_LENGTH_USIZE: usize = 256;
 
         // Generate Prime
-        let p = new_prime(BIT_LENGTH_USIZE);
+        let p = Generator::new_prime(BIT_LENGTH_USIZE);
 
         // Asert prime bit length is same as provided bit length
         assert_eq!(p.bit_length(), BIT_LENGTH);
     }
     #[test]
     fn get_prime(){
-        let x = new_prime(512);
-        println!("Prime: {}",x)
+        let x = Generator::new_prime(512);
     }
     #[test]
     fn get_safe_prime(){
-        let x = safe_prime(256);
-        println!("Safe Prime: {}",x);
+        let x = Generator::new_safe_prime(512);
+    }
+    #[test]
+    fn get_safe_prime_2(){
+        let x = Generator::new_safe_prime_experimental(512);
     }
 }
