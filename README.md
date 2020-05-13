@@ -15,7 +15,7 @@ This crate **requires the use of the nightly toolchain** due to the use of ramp 
 
 Add the following to your `cargo.toml`:
 
-`ramp-primes = "0.3.0"`
+`ramp-primes = "0.4.0"`
 
 `ramp = "0.5"`
 
@@ -28,12 +28,12 @@ If you have not already, install the nightly toolchain as this will only work on
 ### Example of Prime Number Generation
 
 ```rust
-use ramp_primes::new_prime;
+use ramp_primes::Generator;
 
 fn main(){
   // Generates two primes (p,q) both of 512 bits
-  let p = new_prime(512);
-  let q = new_prime(512);
+  let p = Generator::new_prime(512);
+  let q = Generator::new_prime(512);
   
   // Generates the modulus n from p and q
   let n = p * q;
@@ -43,22 +43,22 @@ fn main(){
 ### Example of Safe Prime Number Generation
 
 ```rust
-use ramp_primes::safe_prime;
+use ramp_primes::Generator;
 
 fn main(){
     // Outputs a Large Prime with 64 bits using [(n-1)/2]
-    let p = safe_prime(64);
+    let p = Generator::safe_prime(64);
 }
 ```
 
 ### Example of Random Number Generation
 
 ```rust
-use ramp_primes::new_uint;
+use ramp_primes::Generator;
 
 fn main(){
   // Creates a Large Integer of 1024 bits
-  let x = new_uint(1024);
+  let x = Generator::new_uint(1024);
   
   // Prints out the randomly generated number
   println!("x: {}",x);
@@ -95,7 +95,7 @@ If the number passes these tests, it is considered with high probability to be p
 
 ### Safe Primes
 
-Safe Primes are generated simply by checking if 2q + 1 is a prime with the tests listed above.
+Safe Primes are generated simply by checking if (p-1)/2 is a prime with the tests listed above.
 
 ## License
 
