@@ -1,13 +1,15 @@
-#![no_std]
+//#![no_std]
 
 extern crate rand;
 extern crate ramp;
 
 use ramp::RandomInt;
 use ramp::int::Int;
+use ramp::traits::Integer;
 
 pub struct Generator;
 pub struct Verification;
+pub struct Factorization;
 
 
 impl Generator {
@@ -17,11 +19,11 @@ impl Generator {
     /// 
     /// ## Example
     /// ```
-    /// use ramp_primes::new_uint;
+    /// use ramp_primes::Generator;
     /// 
     /// fn main(){
     ///     // Outputs a Large Integer with 1024 bits
-    ///     let large_uint = new_uint(1024);
+    ///     let large_uint = Generator::new_uint(1024);
     /// }
     /// ```
     pub fn new_uint(n: usize) -> Int{
@@ -48,12 +50,12 @@ impl Generator {
     /// 
     /// ## Example
     /// ```
-    /// use ramp_primes::new_prime;
+    /// use ramp_primes::Generator;
     /// 
     /// fn main(){
     ///     // Outputs a Large Prime with 512 bits
-    ///     let p = new_prime(512);
-    ///     let q = new_prime(512);
+    ///     let p = Generator::new_prime(512);
+    ///     let q = Generator::new_prime(512);
     /// 
     ///     // Multiplies p times q and returns the product
     ///     let n = p * q;
@@ -77,11 +79,11 @@ impl Generator {
     /// 
     /// ## Example
     /// ```
-    /// use ramp_primes::safe_prime;
+    /// use ramp_primes::Generator;
     /// 
     /// fn main(){
     ///     // Outputs a Large Prime with 64 bits
-    ///     let p = safe_prime(64);
+    ///     let p = Generator::safe_prime(64);
     /// }
     /// ```
     pub fn new_safe_prime(n: usize) -> Int {
@@ -97,7 +99,7 @@ impl Generator {
             }
         }
     }
-    
+    /// This function adds a 2x speed boost to safe prime generation but also may return an `Int` that is not of the specified size
     pub fn new_safe_prime_experimental(n: usize) -> Int {
         let mut rng = rand::thread_rng();
         
@@ -134,6 +136,55 @@ impl Verification {
             return false;
         }
     }
+    /// Verifies whether the input is a safe prime number or not
+    pub fn verify_safe_prime(input: Int) -> bool {
+        if is_safe_prime(&input) == true {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+}
+
+impl Factorization {
+    pub fn prime_factor(mut n: Int) -> Option<Int> {
+        if is_prime(&n) {
+            return Some(n)
+        }
+
+        // Init 1 and 2
+        let one = Int::one();
+        let two = &one + &one;
+        let three = &two + &one;
+
+        // Step 1 | n divided by 2
+        while n.is_even() {
+            n = n / &two;
+        }
+
+        // Step 2 |
+        let n_sqrt = n.clone().sqrt_rem().unwrap().0;
+
+        for mut i in three..n_sqrt {
+            while n.is_multiple_of(&i) {
+                n = n / &i;
+            }
+            i = i + &two;
+        }
+
+        // Step 3
+        if n > two {
+            return Some(n)
+        }
+        else {
+            return None
+        }
+
+
+    }
+
+    
 }
 
 // Primes
@@ -302,10 +353,17 @@ mod tests {
     }
     #[test]
     fn get_safe_prime(){
-        let x = Generator::new_safe_prime(512);
+        let x = Generator::new_safe_prime(128);
     }
     #[test]
     fn get_safe_prime_2(){
-        let x = Generator::new_safe_prime_experimental(512);
+        let x = Generator::new_safe_prime_experimental(128);
+    }
+    #[test]
+    fn prime(){
+        let x = Generator::new_uint(32);
+        let prime = Factorization::prime_factor(x.clone()).unwrap();
+        println!("x: {}",x.clone());
+        println!("prime factor: {}",prime);
     }
 }
