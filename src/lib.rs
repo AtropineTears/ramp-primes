@@ -13,6 +13,17 @@ pub struct Factorization;
 
 
 impl Generator {
+    /// Generates a composite number
+    pub fn new_composite(n: usize) -> Int {
+        let mut rng = rand::thread_rng();
+        loop {
+            let mut candidate: Int = rng.gen_uint(n); 
+            candidate.set_bit((n-1) as u32, true);
+            if is_prime(&candidate) == false { 
+                return candidate;
+            }
+        }
+    }
     /// # Large Unsigned Integer Generator
     /// 
     /// This function takes as input n, the bit-length specified for the integer.
@@ -148,7 +159,8 @@ impl Verification {
 }
 
 impl Factorization {
-    pub fn prime_factor(mut n: Int) -> Option<Int> {
+    /// Gets the Largest Prime Factor for sizes up to 32 bits (and possibly 48 or larger)
+    pub fn prime_factor_32(mut n: Int) -> Option<Int> {
         if is_prime(&n) {
             return Some(n)
         }
@@ -362,8 +374,6 @@ mod tests {
     #[test]
     fn prime(){
         let x = Generator::new_uint(32);
-        let prime = Factorization::prime_factor(x.clone()).unwrap();
-        println!("x: {}",x.clone());
-        println!("prime factor: {}",prime);
+        let prime = Factorization::prime_factor_32(x).unwrap();
     }
 }
