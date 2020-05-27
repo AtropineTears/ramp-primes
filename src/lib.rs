@@ -472,13 +472,48 @@ mod tests {
     #[test]
     fn check_prime_length() {
         // Two constants For Bit Length
-        const BIT_LENGTH: u32 = 512;
-        const BIT_LENGTH_USIZE: usize = 512;
+        const BIT_LENGTH: u32 = 256;
+        const BIT_LENGTH_USIZE: usize = 256;
 
         // Generate Prime
         let p = Generator::new_prime(BIT_LENGTH_USIZE);
 
         // Asert prime bit length is same as provided bit length
         assert_eq!(p.bit_length(), BIT_LENGTH);
+    }
+    #[test]
+    fn get_prime() {
+        let x = Generator::new_prime(512);
+        assert_eq!(x.bit_length(), 512);
+    }
+    #[test]
+    fn get_safe_prime() {
+        let x = Generator::new_safe_prime(128);
+        assert_eq!(x.bit_length(), 128);
+    }
+    // #[test]
+    // fn get_safe_prime_2() {
+    //     let x = Generator::new_safe_prime_experimental(128);
+    //     assert_eq!(x.bit_length(), 128);
+    // }
+    #[test]
+    fn prime_factorization() {
+        let x = Generator::new_prime(16);
+        let y = Generator::new_prime(16);
+        let semiprime = x.clone() * y.clone();
+
+        let largest_factor = Factorization::prime_factor_32(semiprime);
+        match largest_factor {
+            Some(largest_factor) => { 
+                if x > y {
+                    assert_eq!(largest_factor, x);
+                } else {
+                    assert_eq!(largest_factor, y);
+                }
+            },
+            _ => {
+                assert_eq!(largest_factor, None);
+            }
+        }
     }
 }
