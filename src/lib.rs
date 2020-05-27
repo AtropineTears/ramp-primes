@@ -485,11 +485,13 @@ mod tests {
     fn get_prime() {
         let x = Generator::new_prime(512);
         assert_eq!(x.bit_length(), 512);
+        assert_eq!(Verification::verify_prime(&x), true);
     }
     #[test]
     fn get_safe_prime() {
         let x = Generator::new_safe_prime(128);
         assert_eq!(x.bit_length(), 128);
+        assert_eq!(Verification::verify_safe_prime(&x), true);
     }
     // #[test]
     // fn get_safe_prime_2() {
