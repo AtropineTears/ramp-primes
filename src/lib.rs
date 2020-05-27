@@ -129,8 +129,8 @@ impl Generator {
 }
 impl Verification {
     /// Verifies whether the input is a composite number or not
-    pub fn verify_composite(input: Int) -> bool {
-        if is_prime(&input) == false {
+    pub fn verify_composite(input: &Int) -> bool {
+        if is_prime(input) == false {
             return true
         }
         else {
@@ -139,8 +139,8 @@ impl Verification {
     }
 
     /// Verifies whether the input is a prime number or not
-    pub fn verify_prime(input: Int) -> bool {
-        if is_prime(&input) == true { 
+    pub fn verify_prime(input: &Int) -> bool {
+        if is_prime(input) == true { 
             return true;
         }
         else {
@@ -148,8 +148,8 @@ impl Verification {
         }
     }
     /// Verifies whether the input is a safe prime number or not
-    pub fn verify_safe_prime(input: Int) -> bool {
-        if is_safe_prime(&input) == true {
+    pub fn verify_safe_prime(input: &Int) -> bool {
+        if is_safe_prime(input) == true {
             return true
         }
         else {
@@ -249,7 +249,7 @@ fn miller_rabin(candidate: &Int, limit: usize) -> bool {
         }
         else {
             //println!("Else Statement");
-            for _ in one.clone()..(s - one).clone() {
+            for _ in one.clone()..(s - one) {
                 x = x.pow_mod(&two,candidate);
                 //y = Int::modpow(&y, &two, candidate);
                 if x == Int::one() {
@@ -288,7 +288,7 @@ fn rewrite(n: &Int) -> (Int,Int) {
     //println!("Factors:");
     //println!("d: {}",d);
     //println!("2^{}",i);
-    return (d.clone(),i)
+    return (d,i)
 }
 
 
