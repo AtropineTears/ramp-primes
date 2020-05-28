@@ -504,18 +504,12 @@ mod tests {
         let y = Generator::new_prime(16);
         let semiprime = x.clone() * y.clone();
 
-        let largest_factor = Factorization::prime_factor_32(semiprime);
-        match largest_factor {
-            Some(largest_factor) => { 
-                if x > y {
-                    assert_eq!(largest_factor, x);
-                } else {
-                    assert_eq!(largest_factor, y);
-                }
-            },
-            _ => {
-                assert_eq!(largest_factor, None);
-            }
+        let largest_factor = Factorization::prime_factor_32(semiprime).unwrap();
+ 
+        if x > y {
+            assert_eq!(largest_factor, x);
+        } else {
+            assert_eq!(largest_factor, y);
         }
     }
 }
