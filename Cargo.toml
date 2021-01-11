@@ -1,6 +1,6 @@
 [package]
 name = "ramp-primes"
-version = "0.4.2"
+version = "0.5.0"
 authors = ["0xAtropine"]
 edition = "2018"
 description = "A Rust Library For Generating Large Prime and Composite Numbers using ramp with a simplistic interface."
