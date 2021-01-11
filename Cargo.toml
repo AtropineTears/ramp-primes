@@ -1,12 +1,12 @@
 [package]
 name = "ramp-primes"
-version = "0.4.1"
-authors = ["0xSilene <51803887+0xSilene@users.noreply.github.com>","AtropineTears"]
+version = "0.4.2"
+authors = ["0xAtropine"]
 edition = "2018"
 description = "A Rust Library For Generating Large Prime and Composite Numbers using ramp with a simplistic interface."
 keywords = ["random","primes","ramp","num","math"]
-homepage = "https://github.com/0xSilene/ramp-primes"
-repository = "https://github.com/0xSilene/ramp-primes"
+homepage = "https://github.com/0xAtropine/ramp-primes"
+repository = "https://github.com/0xAtropine/ramp-primes"
 categories = ["cryptography", "science","algorithms"]
 readme = "README.md"
 license = "MIT OR Apache-2.0"
